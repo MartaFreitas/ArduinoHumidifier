@@ -3,35 +3,29 @@
 #define DHTPIN 3     
 #define DHTTYPE DHT11  
 
-#define LED_RED     8
-#define LED_GREEN   7
-#define LED_BLUE  6
+#define LED_RED 8
+#define LED_GREEN 7
+#define LED_BLUE 6
 #define RELAY 2
 
 #define THR_NORMAL 27
-#define THR_CAUTION 32 // below 32C humiture
-#define THR_CAUTION_EXTR 41 // below 41C humiture
+#define THR_CAUTION 32 
+#define THR_CAUTION_EXTR 41
 
-// Inicializa o sensor DHT 
 DHT dht(DHTPIN, DHTTYPE);
 
-// Variaveis
 float humidity, heat_index,  temperature_celsius;
-int red, green, blue;
 
-
-//char c =' ';
 void setup() {
   
     Serial.begin(9600);
  
-    // configuração dos pinos
     pinMode(LED_RED, OUTPUT);
     pinMode(LED_GREEN, OUTPUT);
     pinMode(LED_BLUE, OUTPUT); 
     pinMode(RELAY, OUTPUT);
   
-    //inicia como desligado
+    // RGB CATHODO
     digitalWrite(LED_RED, LOW); 
     digitalWrite(LED_GREEN, LOW);  
     digitalWrite(LED_BLUE, LOW); 
@@ -39,9 +33,9 @@ void setup() {
     dht.begin();
 
     delay(100);
+    // RELAY NORMAL OPEN
     digitalWrite(RELAY, HIGH);  
 
-     // test the LEDs
      // RED
     digitalWrite(LED_RED, HIGH);
     digitalWrite(LED_GREEN, LOW);
@@ -72,10 +66,12 @@ void setup() {
     digitalWrite(LED_GREEN, HIGH);
     digitalWrite(LED_BLUE, LOW);
     delay(3000);
+    // White
     digitalWrite(LED_RED, HIGH);
     digitalWrite(LED_GREEN, HIGH);
     digitalWrite(LED_BLUE, HIGH);
     delay(3000);
+    // TURN OFF
     digitalWrite(LED_RED, LOW);
     digitalWrite(LED_GREEN, LOW);
     digitalWrite(LED_BLUE, LOW);
@@ -136,7 +132,6 @@ void loop() {
 
 
     }
-
 
     Serial.print("humidity : "); 
     Serial.print(humidity);
